@@ -17,6 +17,15 @@
     box-sizing: border-box;
 }
 
+.datetime-row{
+    display:flex;
+    gap:10px;
+}
+
+.datetime-row > div{
+    flex:1;
+}
+
 body {
     margin: 0;
     padding: 20px;
@@ -183,10 +192,25 @@ button {
 
         <textarea id="descriptionInput" placeholder="간단한 설명 입력"></textarea>
 
-        <input type="date" id="deadlineInput">
+        <div class="datetime-row">
 
-        <input type="time" id="timeInput">
+            <div>
+                <div class="input-title">
+                    📅 마감 날짜
+                </div>
 
+                <input type="date" id="deadlineInput">
+            </div>
+
+            <div>
+                <div class="input-title">
+                    ⏰ 마감 시간
+                </div>
+
+                <input type="time" id="timeInput">
+            </div>
+
+        </div>
         <select id="colorInput">
             <option value="color-blue">파랑</option>
             <option value="color-red">빨강</option>
