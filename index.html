@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -7,188 +6,256 @@
 <title>과제 관리</title>
 
 <style>
-*{
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
 }
 
-body{
+body {
     font-family: Arial, sans-serif;
-    background:#f5f5f5;
-    margin:0;
-    padding:20px;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 20px;
 }
 
-.container{
-    max-width:700px;
-    margin:auto;
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+.container {
+    max-width: 760px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
 }
 
-h1{
-    text-align:center;
-    margin-bottom:20px;
+h1 {
+    text-align: center;
 }
 
-.input-area{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:20px;
+.count-box {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 
-.input-area input{
-    padding:10px;
-    border:1px solid #ccc;
-    border-radius:6px;
+.input-area {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
 }
 
-#subjectInput{
-    flex:1;
-    min-width:180px;
+.input-area input,
+.input-area select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 
-button{
-    padding:10px 15px;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    background:#4f7cff;
-    color:white;
+#subjectInput {
+    flex: 1;
+    min-width: 150px;
 }
 
-button:hover{
-    opacity:0.9;
+button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #4f7cff;
+    color: white;
 }
 
-.header{
-    display:flex;
-    padding:10px;
-    font-weight:bold;
-    border-bottom:2px solid #ddd;
-    margin-bottom:5px;
+.filter-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
-.header-subject{
-    flex:1;
+.filter-area button {
+    background: #333;
 }
 
-.header-date{
-    width:120px;
-    text-align:center;
+.header {
+    display: flex;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
 }
 
-.header-dday{
-    width:80px;
-    text-align:center;
+.header-subject {
+    flex: 1;
 }
 
-.task{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:12px;
-    margin-bottom:6px;
-    border-radius:8px;
+.header-date {
+    width: 120px;
+    text-align: center;
 }
 
-.subject{
-    flex:1;
-    font-weight:bold;
+.header-dday {
+    width: 80px;
+    text-align: center;
 }
 
-.deadline{
-    width:120px;
-    text-align:center;
+.task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    margin-top: 7px;
+    border-radius: 8px;
+    border-left: 8px solid #999;
 }
 
-.dday{
-    width:80px;
-    text-align:center;
-    font-weight:bold;
+.subject {
+    flex: 1;
+    font-weight: bold;
 }
 
-.delete-btn{
-    background:#888;
-    padding:6px 10px;
+.deadline {
+    width: 120px;
+    text-align: center;
+}
+
+.dday {
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.delete-btn {
+    background: #888;
+    padding: 6px 10px;
 }
 
 .done .subject,
 .done .deadline,
-.done .dday{
-    color:gray;
-    text-decoration:line-through;
+.done .dday {
+    color: gray;
+    text-decoration: line-through;
 }
 
-.urgent{
-    background:#ffdede;
+.urgent {
+    background: #ffdede;
 }
 
-.soon{
-    background:#fff2d9;
+.soon {
+    background: #fff2d9;
 }
 
-.safe{
-    background:#e2f0ff;
+.safe {
+    background: #e2f0ff;
 }
 
-.finished{
-    background:#ededed;
+.finished {
+    background: #ededed;
+}
+
+.color-red {
+    border-left-color: #ff5c5c;
+}
+
+.color-blue {
+    border-left-color: #4f7cff;
+}
+
+.color-green {
+    border-left-color: #49b36d;
+}
+
+.color-purple {
+    border-left-color: #9b59b6;
+}
+
+.color-yellow {
+    border-left-color: #f1c40f;
+}
+
+.blink {
+    animation: blinkEffect 0.8s infinite;
+}
+
+@keyframes blinkEffect {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.35;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.empty {
+    text-align: center;
+    color: gray;
+    padding: 25px;
 }
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-```
-<h1>📚 과제 관리</h1>
+    <h1>📚 과제 관리</h1>
 
-<div class="input-area">
-    <input type="text" id="subjectInput" placeholder="과목 입력">
-    <input type="date" id="deadlineInput">
-    <button onclick="addTask()">추가</button>
-</div>
+    <div class="count-box" id="countBox"></div>
 
-<div class="header">
-    <div style="width:25px;"></div>
-    <div class="header-subject">과목</div>
-    <div class="header-date">마감기한</div>
-    <div class="header-dday">D-Day</div>
-    <div style="width:60px;"></div>
-</div>
+    <div class="input-area">
+        <input type="text" id="subjectInput" placeholder="과목 입력">
+        <input type="date" id="deadlineInput">
 
-<div id="taskList"></div>
-```
+        <select id="colorInput">
+            <option value="color-blue">파랑</option>
+            <option value="color-red">빨강</option>
+            <option value="color-green">초록</option>
+            <option value="color-purple">보라</option>
+            <option value="color-yellow">노랑</option>
+        </select>
+
+        <button onclick="addTask()">추가</button>
+    </div>
+
+    <div class="filter-area">
+        <button onclick="showAll()">전체 보기</button>
+        <button onclick="showToday()">오늘 해야 할 일</button>
+    </div>
+
+    <div class="header">
+        <div style="width:25px;"></div>
+        <div class="header-subject">과목</div>
+        <div class="header-date">마감기한</div>
+        <div class="header-dday">D-Day</div>
+        <div style="width:60px;"></div>
+    </div>
+
+    <div id="taskList"></div>
 
 </div>
 
 <script>
-
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let filterMode = "all";
 
-function saveTasks(){
+function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-function addTask(){
-
+function addTask() {
     const subject = document.getElementById("subjectInput").value.trim();
     const deadline = document.getElementById("deadlineInput").value;
+    const color = document.getElementById("colorInput").value;
 
-    if(!subject || !deadline){
+    if (!subject || !deadline) {
         alert("과목과 마감기한을 입력하세요.");
         return;
     }
 
     tasks.push({
-        subject,
-        deadline,
-        done:false
+        subject: subject,
+        deadline: deadline,
+        color: color,
+        done: false
     });
 
     document.getElementById("subjectInput").value = "";
@@ -198,92 +265,111 @@ function addTask(){
     renderTasks();
 }
 
-function getDday(deadline){
-
+function getDiffDays(deadline) {
     const today = new Date();
     today.setHours(0,0,0,0);
 
     const due = new Date(deadline);
     due.setHours(0,0,0,0);
 
-    const diff = Math.ceil(
-        (due - today)/(1000*60*60*24)
-    );
+    return Math.ceil((due - today) / (1000 * 60 * 60 * 24));
+}
 
-    if(diff === 0) return "D-Day";
-    if(diff > 0) return "D-" + diff;
+function getDday(deadline) {
+    const diff = getDiffDays(deadline);
+
+    if (diff === 0) return "D-Day";
+    if (diff > 0) return "D-" + diff;
     return "지남";
 }
 
-function getClass(task){
+function getClass(task) {
+    if (task.done) return "finished";
 
-    if(task.done){
-        return "finished";
-    }
+    const diff = getDiffDays(task.deadline);
 
-    const today = new Date();
-    today.setHours(0,0,0,0);
-
-    const due = new Date(task.deadline);
-    due.setHours(0,0,0,0);
-
-    const diff = Math.ceil(
-        (due - today)/(1000*60*60*24)
-    );
-
-    if(diff <= 1){
-        return "urgent";
-    }
-
-    if(diff <= 3){
-        return "soon";
-    }
-
+    if (diff <= 1) return "urgent";
+    if (diff <= 3) return "soon";
     return "safe";
 }
 
-function toggleDone(index){
-
+function toggleDone(index) {
     tasks[index].done = !tasks[index].done;
 
     saveTasks();
     renderTasks();
 }
 
-function deleteTask(index){
-
-    tasks.splice(index,1);
+function deleteTask(index) {
+    tasks.splice(index, 1);
 
     saveTasks();
     renderTasks();
 }
 
-function renderTasks(){
+function showAll() {
+    filterMode = "all";
+    renderTasks();
+}
 
-    tasks.sort((a,b)=>{
+function showToday() {
+    filterMode = "today";
+    renderTasks();
+}
 
-        if(a.done !== b.done){
+function updateCount() {
+    const remaining = tasks.filter(task => !task.done).length;
+    const todayTasks = tasks.filter(task => !task.done && getDiffDays(task.deadline) === 0).length;
+
+    document.getElementById("countBox").innerText =
+        `남은 과제 ${remaining}개 | 오늘 마감 ${todayTasks}개`;
+}
+
+function renderTasks() {
+    tasks.sort((a, b) => {
+        if (a.done !== b.done) {
             return a.done - b.done;
         }
 
         return new Date(a.deadline) - new Date(b.deadline);
     });
 
-    const taskList = document.getElementById("taskList");
+    updateCount();
 
+    const taskList = document.getElementById("taskList");
     taskList.innerHTML = "";
 
-    tasks.forEach((task,index)=>{
+    let visibleTasks = tasks;
+
+    if (filterMode === "today") {
+        visibleTasks = tasks.filter(task => !task.done && getDiffDays(task.deadline) === 0);
+    }
+
+    if (visibleTasks.length === 0) {
+        taskList.innerHTML = `<div class="empty">표시할 과제가 없습니다.</div>`;
+        return;
+    }
+
+    visibleTasks.forEach((task) => {
+        const realIndex = tasks.indexOf(task);
 
         const div = document.createElement("div");
 
-        div.className = `task ${getClass(task)} ${task.done ? "done" : ""}`;
+        const isDday = getDiffDays(task.deadline) === 0 && !task.done;
+
+        div.className = `
+            task
+            ${getClass(task)}
+            ${task.color || "color-blue"}
+            ${task.done ? "done" : ""}
+            ${isDday ? "blink" : ""}
+        `;
 
         div.innerHTML = `
             <input
                 type="checkbox"
                 ${task.done ? "checked" : ""}
-                onchange="toggleDone(${index})"
+                onchange="toggleDone(${realIndex})"
             >
 
             <div class="subject">${task.subject}</div>
@@ -296,7 +382,7 @@ function renderTasks(){
 
             <button
                 class="delete-btn"
-                onclick="deleteTask(${index})"
+                onclick="deleteTask(${realIndex})"
             >
                 삭제
             </button>
@@ -307,7 +393,6 @@ function renderTasks(){
 }
 
 renderTasks();
-
 </script>
 
 </body>
